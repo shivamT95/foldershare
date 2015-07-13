@@ -55,7 +55,6 @@ function download(res,req){
     console.log(data);
     if (data.indexOf(file)>-1)
     {
-      stream = fs.createWriteStream(file);
       fs.createReadStream('data/'+file).pipe(res);
     }
     else
