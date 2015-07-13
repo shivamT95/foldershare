@@ -40,7 +40,6 @@ function folder(res) {
     '<body>'+
    '<H3>Folder has following files :-<br></H3>';
     for(x in data){
-      console.log(data[x]);
       if(path.extname(data[x]) != ''){
       body+='<b><a href ="/download?'+data[x]+'">'+data[x]+'</a></b><br>';
       }
@@ -52,7 +51,6 @@ function folder(res) {
   });
 }
 function download(res,req){
-  console.log(url.parse(req.url));
   fs.readdir(pth,function (err,data){
     if(err)
     {
