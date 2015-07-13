@@ -1,5 +1,13 @@
-var fs = require('fs')
-var url = require('url')
+var fs = require('fs');
+var url = require('url');
+var path = require('path');
+if (process.argv[2]!=undefined){
+  pth = process.argv[2];
+}
+else
+{
+  pth = 'data';
+}
 function start(response) {
   console.log("Request handler 'start' was called.");
     var body = '<html>'+
@@ -17,7 +25,7 @@ function start(response) {
   response.end();
 }
 function folder(res) {
-  fs.readdir('data',function (err,data){
+  fs.readdir(pth,function (err,data){
     if(err)
     {
       console.log(err);
@@ -33,7 +41,9 @@ function folder(res) {
    '<H3>Folder has following files :-<br></H3>';
     for(x in data){
       console.log(data[x]);
+      if(path.extname(data[x]) != ''){
       body+='<b><a href ="/download?'+data[x]+'">'+data[x]+'</a></b><br>';
+      }
     }
     body+='</body></html>'
     res.writeHead(200, {"Content-Type": "text/html"});
@@ -43,7 +53,7 @@ function folder(res) {
 }
 function download(res,req){
   console.log(url.parse(req.url));
-  fs.readdir('data',function (err,data){
+  fs.readdir(pth,function (err,data){
     if(err)
     {
       console.log(err);
@@ -52,10 +62,12 @@ function download(res,req){
       return;
     }
     var file = url.parse(req.url).query;
-    console.log(data);
+    console.log(process.argv);
     if (data.indexOf(file)>-1)
     {
-      fs.createReadStream('data/'+file).pipe(res);
+    res.writeHead(200, {"Content-Type": "application/octet-stream",
+      "Content-Disposition": "attachment; filename="+file});
+      fs.createReadStream(pth+'/'+file).pipe(res);
     }
     else
     {
