@@ -59,7 +59,7 @@ function download(res,req){
       res.end();
       return;
     }
-    var file = url.parse(req.url).query;
+    var file = decodeURI(url.parse(req.url).query);
     console.log(process.argv);
     if (data.indexOf(file)>-1)
     {
