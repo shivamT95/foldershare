@@ -5,7 +5,7 @@ http.createServer(function(request,response) {
   var pn = url.parse(request.url).pathname;
   console.log( " request for "+pn+ " recieved");
   route(handle,pn,response,request);
-}).listen(8888);
+}).listen(parseInt(process.argv[2]));
 console.log("sever started");
 }
 exports.start = start;

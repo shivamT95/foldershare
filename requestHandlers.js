@@ -1,8 +1,8 @@
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
-if (process.argv[2]!=undefined){
-  pth = process.argv[2];
+if (process.argv[3]!=undefined){
+  pth = process.argv[3];
 }
 else
 {

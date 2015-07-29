@@ -10,7 +10,7 @@ A nodejs implementation to create a web server to share a folder on your PC
 # Usage
 In project directory run
 
- `node index.js path`
+ `node index.js port path`
 (where path is the path of folder to be shared)
 
 This creates a server at port 8888 on your PC.
